@@ -43,3 +43,9 @@ Content-Type: application/json
 
 ### Query
 GET http://localhost:8083/api/course-documents/2
+
+### Elastic
+GET http://localhost:9200/courses/_search?pretty=true
+
+### Query
+GET http://localhost:8083/api/course-documents?word=mattis
