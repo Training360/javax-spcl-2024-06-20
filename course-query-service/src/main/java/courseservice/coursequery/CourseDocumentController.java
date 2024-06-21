@@ -2,7 +2,6 @@ package courseservice.coursequery;
 
 import courseservice.NotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
