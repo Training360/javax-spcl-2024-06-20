@@ -1,0 +1,9 @@
+###
+GRPC http://localhost:9091/training.ratingservice.grpcgateway.RatingService/rate
+Content-Type: application/json
+
+{
+  "courseId": 1,
+  "employeeId": 2,
+  "stars": 3
+}
