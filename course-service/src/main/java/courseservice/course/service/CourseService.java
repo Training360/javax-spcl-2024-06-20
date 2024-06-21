@@ -4,6 +4,7 @@ import courseservice.course.dto.*;
 import courseservice.course.model.Course;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,13 +20,14 @@ public class CourseService {
 
     private CourseMapper courseMapper;
 
-    private ApplicationEventPublisher eventPublisher;
+    private StreamBridge streamBridge;
 
     public CourseView createCourse(CreateCourseCommand command) {
         var course =  Course.announceCourse(command);
         courseRepository.save(course);
 
-        eventPublisher.publishEvent(courseMapper.toEvent(course));
+        streamBridge.send("courses-events",
+                courseMapper.toEvent(course));
 
         return courseMapper.toView(course);
     }
