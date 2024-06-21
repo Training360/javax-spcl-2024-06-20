@@ -1,5 +1,6 @@
 package careerservice.enrollment.service;
 
+import careerservice.NotFoundException;
 import careerservice.enrollment.view.EnrollmentView;
 import careerservice.enrollment.model.EnrollCommand;
 import careerservice.enrollment.model.Enrollment;
@@ -35,4 +36,16 @@ public class EnrollmentService {
         }
     }
 
+    public void complete(long courseId, long employeeId) {
+        enrollmentRepository.findByCourseIdAndEmployeeId(courseId, employeeId)
+                .orElseThrow(() -> new NotFoundException("Not found"))
+                .complete();
+
+    }
+
+    public void cancel(long courseId, long employeeId) {
+        enrollmentRepository.findByCourseIdAndEmployeeId(courseId, employeeId)
+                .orElseThrow(() -> new NotFoundException("Not found"))
+                .cancel();
+    }
 }
